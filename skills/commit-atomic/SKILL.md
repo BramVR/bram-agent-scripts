@@ -1,4 +1,7 @@
-/commit-atomic
+---
+name: commit-atomic
+description: Use when the user asks how to commit the current work cleanly, wants an atomic commit plan, or needs help separating changes before committing.
+---
 
 Review the current diff and propose the smallest sensible atomic commit plan.
 

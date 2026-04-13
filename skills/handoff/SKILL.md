@@ -1,4 +1,7 @@
-/handoff
+---
+name: handoff
+description: Use when the user asks for a handoff, session summary, or compact transfer note for another agent or later session.
+---
 
 Prepare a compact handoff for another session or agent.
 

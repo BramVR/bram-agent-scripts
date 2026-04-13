@@ -1,4 +1,7 @@
-/pickup
+---
+name: pickup
+description: Use when the user asks to resume work, reconstruct current repo state, or summarize task status before making changes.
+---
 
 Reconstruct the current task state before making changes.
 

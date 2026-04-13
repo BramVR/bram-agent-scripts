@@ -10,7 +10,8 @@ This repository is the canonical source for Bram's personal Codex workflow.
 ## Canonical Paths
 - Canonical instructions: `C:/PROJECTS/GG/bram-agent-scripts/AGENTS.md`
 - Home mirror: `C:/Users/ZO/AGENTS.md`
-- Global prompts target: `C:/Users/ZO/.codex/prompts/`
+- Global skills target: `C:/Users/ZO/.agents/skills/`
+- Canonical skills: `C:/PROJECTS/GG/bram-agent-scripts/skills/`
 - Helper scripts: `C:/PROJECTS/GG/bram-agent-scripts/scripts/`
 
 ## Communication Style
@@ -53,16 +54,17 @@ This repository is the canonical source for Bram's personal Codex workflow.
 - Keep docs concise and operational.
 - If a workflow or contract is likely to be reused, document it once in the canonical place instead of duplicating it in multiple repos.
 
-## Slash Commands
-- Global slash-command prompts live in `C:/Users/ZO/.codex/prompts/`.
-- Canonical prompt files live in `C:/PROJECTS/GG/bram-agent-scripts/prompts/` and are mirrored into the home prompts directory.
-- Keep slash commands small, explicit, and task-oriented.
-- Prefer prompts for repeatable workflows such as pickup, handoff, and commit planning.
-- Current baseline commands:
-  - `/pickup`
-  - `/handoff`
-  - `/commit-atomic`
-  - `/split-commits`
+## Skills
+- Codex reusable workflows live as skills, not deprecated custom prompts.
+- Global user skills live in `C:/Users/ZO/.agents/skills/`.
+- Canonical skill directories live in `C:/PROJECTS/GG/bram-agent-scripts/skills/` and are mirrored into the home skills directory.
+- Keep skills small, explicit, and task-oriented.
+- Prefer skills for repeatable workflows such as pickup, handoff, and commit planning.
+- Current baseline skills:
+  - `$pickup`
+  - `$handoff`
+  - `$commit-atomic`
+  - `$split-commits`
 
 ## Tools
 - Helper scripts live in `C:/PROJECTS/GG/bram-agent-scripts/scripts/`.
@@ -70,8 +72,8 @@ This repository is the canonical source for Bram's personal Codex workflow.
 - Current tools:
   - `committer.ps1`: stage only explicit files, show staged diff summary, then commit
   - `sync-agents.ps1`: mirror canonical `AGENTS.md` to `C:/Users/ZO/AGENTS.md`
-  - `sync-prompts.ps1`: mirror prompt files to `C:/Users/ZO/.codex/prompts/`
-  - `sync-all.ps1`: mirror both `AGENTS.md` and prompts
+  - `sync-skills.ps1`: mirror skill directories to `C:/Users/ZO/.agents/skills/`
+  - `sync-all.ps1`: mirror both `AGENTS.md` and skills
 
 ## Repo Interaction
 - A repo-local `AGENTS.md` may add stricter rules or override workflow details.
@@ -80,4 +82,4 @@ This repository is the canonical source for Bram's personal Codex workflow.
 
 ## Maintenance
 - Edit this file here, then mirror it to `C:/Users/ZO/AGENTS.md`.
-- Keep prompts and scripts small, explicit, and dependency-light.
+- Keep skills and scripts small, explicit, and dependency-light.
