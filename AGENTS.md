@@ -21,6 +21,13 @@ This repository is the canonical source for Bram's personal Codex workflow.
 - If uncertain, say what is known, what is unknown, and what you will verify next.
 - Keep handoffs compact and action-oriented.
 
+## Critical Thinking
+- Fix root cause, not a band-aid.
+- If unsure, read more code first; if still stuck, ask with short options.
+- If there are conflicting signals or constraints, call them out and choose the safer path.
+- If you see unrecognized changes, assume another agent made them; keep going and focus on your changes. If they cause problems, stop and ask the user.
+- Leave breadcrumb notes in the thread so the next step is easy to follow.
+
 ## Workflow Defaults
 - Shell: PowerShell on Windows by default.
 - Keep commit history reviewable and small.
@@ -32,20 +39,30 @@ This repository is the canonical source for Bram's personal Codex workflow.
 - Do not amend, force-push, or use destructive git commands unless explicitly intended.
 
 ## Git
-- Safe by default: `git status`, `git diff`, `git log`.
+- Safe by default: `git status`, `git diff`, `git log`. Push only when the user asks.
+- `git checkout` is ok for PR review or when the user explicitly requests it.
+- Branch changes require user consent.
 - Prefer feature branches for active work; do not commit directly to `main` unless that is explicitly intended.
 - Keep commits atomic: one logical change per commit.
 - Do not mix refactors, behavior changes, docs-only updates, and test-only updates unless they are inseparable.
 - Stage only explicit files or hunks. Do not use broad staging patterns like `git add .` or `git add -A`.
 - Review `git status` and `git diff --staged` before every commit.
+- Big review command: `git --no-pager diff --color=never`.
+- Multi-agent: check `git status` and `git diff` before edits; ship small commits.
 - Prefer small, reviewable commits over large mixed commits.
+- Commit helper on `PATH`: `committer` (bash). Prefer it; if the repo has `./scripts/committer` or `./scripts/committer.ps1`, use that local helper instead.
 - Use `fixup!` commits for local follow-up changes when planning to squash later.
-- No amend unless explicitly intended.
+- No amend unless asked.
 - No force-push unless explicitly intended.
-- No destructive operations unless explicitly intended: `reset --hard`, `clean`, `restore`, mass delete, or similar.
+- Destructive operations are forbidden unless explicitly requested: `reset --hard`, `clean`, `restore`, `rm`, mass delete, or similar.
 - Do not revert unrelated local changes.
+- Do not delete or rename unexpected files; stop and ask.
 - If the working tree contains unrelated edits, isolate your commit to the files you actually changed.
+- Remotes under `~/Projects`: prefer HTTPS; flip SSH remotes to HTTPS before `pull` or `push`.
+- Avoid manual `git stash`; if Git auto-stashes during `pull` or `rebase`, that is fine.
+- If the user types a command such as “pull and push,” that counts as consent for that command.
 - Prefer helper scripts that keep staging explicit and narrow.
+- No repo-wide search/replace scripts; keep edits small and reviewable.
 
 ## Docs
 - Read only the docs directly relevant to the boundary you are changing.
