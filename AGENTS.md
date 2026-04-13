@@ -72,6 +72,7 @@ This repository is the canonical source for Bram's personal Codex workflow.
 - Prefer small wrappers that make common workflows safer and easier to repeat.
 - Current tools:
   - `committer.ps1`: stage only explicit files, show staged diff summary, then commit
+  - `docs-list.ps1`: walk `docs/`, report markdown summaries, and surface `read_when` hints from front matter
   - `sync-agents.ps1`: mirror canonical `AGENTS.md` to `C:/Users/ZO/AGENTS.md`
   - `sync-skills.ps1`: mirror skill directories to `C:/Users/ZO/.agents/skills/`
   - `sync-all.ps1`: mirror both `AGENTS.md` and skills
