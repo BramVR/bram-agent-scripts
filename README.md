@@ -19,7 +19,7 @@ Personal Codex workflow files, skills, and helper scripts.
 
 ## Using Skills
 - Open Codex and type `/skills` to browse available skills.
-- Type `$pickup`, `$handoff`, `$commit-atomic`, or `$split-commits` to invoke one explicitly.
+- Type `$pickup`, `$handoff`, `$commit-atomic`, `$split-commits`, or `$video-transcript-downloader` to invoke one explicitly.
 
 ## Notes
 - This repo is personal workflow infrastructure, not project documentation.

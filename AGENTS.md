@@ -65,6 +65,7 @@ This repository is the canonical source for Bram's personal Codex workflow.
   - `$handoff`
   - `$commit-atomic`
   - `$split-commits`
+  - `$video-transcript-downloader`
 
 ## Tools
 - Helper scripts live in `C:/PROJECTS/GG/bram-agent-scripts/scripts/`.
