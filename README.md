@@ -18,8 +18,8 @@ Personal Codex workflow files, skills, and helper scripts.
 ```
 
 ## Helper Scripts
-- `.\scripts\committer.ps1 "message" "path1" "path2"`: stage only explicit paths and commit them
-- `.\scripts\docs-list.ps1`: scan `docs/` in the current repo layout, print each markdown file's front-matter summary, and surface `read_when` hints
+- `committer`: run via `.\scripts\committer.ps1 "message" "path1" "path2"` to stage only explicit paths and commit them
+- `docs-list`: run via `.\scripts\docs-list.ps1` to scan `docs/`, print each markdown file's front-matter summary, and surface `read_when` hints
 
 ## Using Skills
 - Open Codex and type `/skills` to browse available skills.
@@ -27,6 +27,6 @@ Personal Codex workflow files, skills, and helper scripts.
 
 ## Notes
 - This repo is personal workflow infrastructure, not project documentation.
-- `docs-list.ps1` is included as a portable helper for downstream repos that maintain a `docs/` directory with front matter.
+- `docs-list` is included as a portable helper for downstream repos that maintain a `docs/` directory with front matter.
 - Repo-local `AGENTS.md` files remain the source of truth for repo-specific rules.
 - Codex custom prompts in `~/.codex/prompts` are deprecated; this repo uses skills instead.
