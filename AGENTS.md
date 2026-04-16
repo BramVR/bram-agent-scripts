@@ -1,4 +1,4 @@
-# Bram Agent Scripts
+﻿# Bram Agent Scripts
 
 Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`.
 
@@ -38,7 +38,7 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 - Review `git status` and `git diff --staged` before every commit.
 - Big review: `git --no-pager diff --color=never`.
 - Multi-agent: check `git status` and `git diff` before edits; ship small commits.
-- Use `committer` for commits; if a repo ships `./scripts/committer` or `./scripts/committer.ps1`, use that.
+- Use `committer` for commits; `C:/PROJECTS/GG/bram-agent-scripts/scripts/committer.ps1`.
 - Prefer `fixup!` commits for local follow-up changes that will be squashed later.
 - No amend unless asked. No force-push unless explicitly intended.
 - Destructive ops forbidden unless explicit: `reset --hard`, `clean`, `restore`, `rm`, mass delete, or similar.
@@ -88,7 +88,7 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 
 ## Tools
 - Prefer small wrappers that make common workflows safer and repeatable.
-- `committer`: `scripts/committer.ps1`; stage only explicit files, show staged diff summary, then commit.
+- `committer`: canonical helper at `C:/PROJECTS/GG/bram-agent-scripts/scripts/committer.ps1`; Stage only explicit files, show staged diff summary, then commit.
 - `docs-list`: `scripts/docs-list.ps1`; walk `docs/`, report markdown summaries, surface `read_when` hints from front matter.
 - `sync-agents`: `scripts/sync-agents.ps1`; mirror canonical `AGENTS.md` to `C:/Users/ZO/AGENTS.md`.
 - `sync-skills`: `scripts/sync-skills.ps1`; mirror skill dirs to `C:/Users/ZO/.agents/skills/`.
