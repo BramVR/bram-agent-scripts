@@ -66,6 +66,14 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 - Prefer project docs over session memory. If a repo has `docs/`, scan it first with `docs-list` when entering a subsystem with unclear rules or prior decisions.
 - Update docs when behavior, public usage, or workflow changes. Reused workflow/contract: document once in the canonical place.
 - If a feature or subsystem needs durable context, write or update `docs/*.md` as part of the change so later sessions can reload it fast.
+- New docs should start with front matter for `docs-list`: `summary` and `read_when`. Example:
+  ```yaml
+  ---
+  summary: "Automation agent for the Chrome side panel (daemon-backed)."
+  read_when:
+    - "When working on automation tools, /v1/agent, or the side panel agent loop."
+  ---
+  ```
 - Web: search early; quote exact errors; prefer 2024-2025 sources when available.
 - Bugs: add regression test when it fits.
 - Prefer end-to-end verify. If blocked, say what is missing.
