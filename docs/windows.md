@@ -54,7 +54,7 @@ Sync both:
 .\scripts\sync-all.ps1
 ```
 
-List docs when that helper exists:
+List docs in the current working repo when that helper exists:
 
 ```powershell
 .\scripts\docs-list.ps1

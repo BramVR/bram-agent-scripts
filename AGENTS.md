@@ -63,9 +63,9 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 
 ## Docs / Web / Testing
 - Read only docs relevant to the boundary you are changing. Follow links until the domain makes sense; stop when more reading stops changing implementation.
-- Prefer project docs over session memory. If a repo has `docs/`, scan it first with `docs-list` when entering a subsystem with unclear rules or prior decisions.
+- Prefer project docs over session memory. If the active repo has `docs/`, scan that repo's `docs/` first with `docs-list` when entering a subsystem with unclear rules or prior decisions.
 - Update docs when behavior, public usage, or workflow changes. Reused workflow/contract: document once in the canonical place.
-- If a feature or subsystem needs durable context, write or update `docs/*.md` as part of the change so later sessions can reload it fast.
+- If a feature or subsystem needs durable context, write or update the active repo's `docs/*.md` as part of the change so later sessions can reload it fast.
 - New docs should start with front matter for `docs-list`: `summary` and `read_when`. Example:
   ```yaml
   ---
@@ -89,7 +89,7 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 ## Tools
 - Prefer small wrappers that make common workflows safer and repeatable.
 - `committer`: canonical helper at `C:/PROJECTS/GG/bram-agent-scripts/scripts/committer.ps1`; Stage only explicit files, show staged diff summary, then commit.
-- `docs-list`: `scripts/docs-list.ps1`; walk `docs/`, report markdown summaries, surface `read_when` hints from front matter.
+- `docs-list`: `scripts/docs-list.ps1`; by default, walk the active working repo's `docs/`, report markdown summaries, surface `read_when` hints from front matter.
 - `sync-agents`: `scripts/sync-agents.ps1`; mirror canonical `AGENTS.md` to `C:/Users/ZO/AGENTS.md`.
 - `sync-skills`: `scripts/sync-skills.ps1`; mirror skill dirs to `C:/Users/ZO/.agents/skills/`.
 - `sync-all`: `scripts/sync-all.ps1`; mirror both `AGENTS.md` and skills.

@@ -1,8 +1,12 @@
 param(
-    [string]$DocsDir = (Join-Path $PSScriptRoot "..\docs")
+    [string]$DocsDir
 )
 
 $ErrorActionPreference = "Stop"
+
+if ([string]::IsNullOrWhiteSpace($DocsDir)) {
+    $DocsDir = Join-Path (Get-Location) "docs"
+}
 
 $excludedDirs = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 foreach ($name in @("archive", "research")) {
