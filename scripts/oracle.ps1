@@ -47,6 +47,152 @@ function Resolve-BrowserProfileDir {
     return $null
 }
 
+function Test-ProcessIdRunning {
+    param(
+        [string]$ProcessIdText
+    )
+
+    if ([string]::IsNullOrWhiteSpace($ProcessIdText)) {
+        return $false
+    }
+
+    try {
+        $processId = [int]$ProcessIdText.Trim()
+    } catch {
+        return $false
+    }
+
+    try {
+        return $null -ne (Get-Process -Id $processId -ErrorAction Stop)
+    } catch {
+        return $false
+    }
+}
+
+function Test-LocalTcpPortListening {
+    param(
+        [int]$Port
+    )
+
+    if ($Port -le 0) {
+        return $false
+    }
+
+    $tcpClient = $null
+    try {
+        $tcpClient = [System.Net.Sockets.TcpClient]::new()
+        $asyncResult = $tcpClient.BeginConnect("127.0.0.1", $Port, $null, $null)
+        if (-not $asyncResult.AsyncWaitHandle.WaitOne(750)) {
+            return $false
+        }
+
+        $tcpClient.EndConnect($asyncResult)
+        return $true
+    } catch {
+        return $false
+    } finally {
+        if ($null -ne $tcpClient) {
+            $tcpClient.Dispose()
+        }
+    }
+}
+
+function Get-StaleBrowserProfileReasons {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ProfileDir
+    )
+
+    $reasons = New-Object System.Collections.Generic.List[string]
+    if (-not (Test-Path -LiteralPath $ProfileDir)) {
+        return $reasons
+    }
+
+    $pidFile = Join-Path $ProfileDir "chrome.pid"
+    if (Test-Path -LiteralPath $pidFile) {
+        $pidText = (Get-Content -LiteralPath $pidFile -ErrorAction SilentlyContinue | Select-Object -First 1)
+        if (-not (Test-ProcessIdRunning -ProcessIdText $pidText)) {
+            $reasons.Add("stale chrome.pid")
+        }
+    }
+
+    $devToolsFile = Join-Path $ProfileDir "DevToolsActivePort"
+    if (Test-Path -LiteralPath $devToolsFile) {
+        $devToolsLines = @(Get-Content -LiteralPath $devToolsFile -ErrorAction SilentlyContinue)
+        $portText = $null
+        if ($devToolsLines.Count -gt 0) {
+            $portText = [string]$devToolsLines[0]
+        }
+
+        $normalizedPortText = ""
+        if ($null -ne $portText) {
+            $normalizedPortText = $portText.Trim()
+        }
+
+        $port = 0
+        if (-not [int]::TryParse($normalizedPortText, [ref]$port)) {
+            $reasons.Add("invalid DevToolsActivePort")
+        } elseif (-not (Test-LocalTcpPortListening -Port $port)) {
+            $reasons.Add("dead DevToolsActivePort")
+        }
+    }
+
+    return $reasons
+}
+
+function Stop-ChromeProcessesForProfile {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ProfileDir
+    )
+
+    $escapedProfileDir = [Regex]::Escape($ProfileDir)
+    $processes = @(Get-CimInstance Win32_Process -Filter "name = 'chrome.exe'" -ErrorAction SilentlyContinue | Where-Object {
+            $commandLine = $_.CommandLine
+            $null -ne $commandLine -and $commandLine -match "(--user-data-dir=|--user-data-dir=\x22)$escapedProfileDir(\x22|\s|$)"
+        })
+
+    foreach ($process in $processes) {
+        try {
+            Stop-Process -Id $process.ProcessId -Force -ErrorAction Stop
+            Write-Output ("Stopped stale Oracle Chrome process {0} for profile {1}." -f $process.ProcessId, $ProfileDir)
+        } catch {
+            Write-Warning ("Failed to stop stale Oracle Chrome process {0}: {1}" -f $process.ProcessId, $_.Exception.Message)
+        }
+    }
+}
+
+function Clear-StaleBrowserProfileState {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ProfileDir
+    )
+
+    $staleReasons = @(Get-StaleBrowserProfileReasons -ProfileDir $ProfileDir)
+    if ($staleReasons.Count -eq 0) {
+        return
+    }
+
+    Write-Output ("Repairing stale Oracle browser profile state in {0} ({1})." -f $ProfileDir, ($staleReasons -join ", "))
+    Stop-ChromeProcessesForProfile -ProfileDir $ProfileDir
+
+    $transientPaths = @(
+        "chrome.pid",
+        "DevToolsActivePort",
+        "lockfile",
+        "SingletonCookie",
+        "SingletonLock",
+        "SingletonSocket"
+    )
+
+    foreach ($relativePath in $transientPaths) {
+        $targetPath = Join-Path $ProfileDir $relativePath
+        if (Test-Path -LiteralPath $targetPath) {
+            Remove-Item -LiteralPath $targetPath -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
 function Invoke-Oracle {
     param(
         [Parameter(Mandatory = $true)]
@@ -367,6 +513,7 @@ if ($Engine -eq "browser") {
     $resolvedBrowserProfileDir = Resolve-BrowserProfileDir -RequestedPath $BrowserProfileDir
     if ($resolvedBrowserProfileDir) {
         New-Item -ItemType Directory -Force -Path $resolvedBrowserProfileDir | Out-Null
+        Clear-StaleBrowserProfileState -ProfileDir $resolvedBrowserProfileDir
         $env:ORACLE_BROWSER_PROFILE_DIR = $resolvedBrowserProfileDir
     }
 }
