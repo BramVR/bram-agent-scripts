@@ -84,12 +84,13 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 - Canonical skill dirs live in `C:/PROJECTS/GG/bram-agent-scripts/skills/` and mirror into home skills.
 - Keep skills small, explicit, task-oriented.
 - Prefer skills for repeatable workflows such as pickup, handoff, and commit planning.
-- Baseline skills: `$pickup`, `$handoff`, `$commit-atomic`, `$split-commits`, `$video-transcript-downloader`.
+- Baseline skills: `$pickup`, `$handoff`, `$commit-atomic`, `$split-commits`, `$video-transcript-downloader`, `$oracle`.
 
 ## Tools
 - Prefer small wrappers that make common workflows safer and repeatable.
 - `committer`: canonical helper at `C:/PROJECTS/GG/bram-agent-scripts/scripts/committer.ps1`; Stage only explicit files, show staged diff summary, then commit.
 - `docs-list`: `scripts/docs-list.ps1`; by default, walk the active working repo's `docs/`, report markdown summaries, surface `read_when` hints from front matter.
+- `oracle`: `scripts/oracle.ps1`; thin wrapper around `npx -y @steipete/oracle` for previewing or running second-model consults with selected files.
 - `sync-agents`: `scripts/sync-agents.ps1`; mirror canonical `AGENTS.md` to `C:/Users/ZO/AGENTS.md`.
 - `sync-skills`: `scripts/sync-skills.ps1`; mirror skill dirs to `C:/Users/ZO/.agents/skills/`.
 - `sync-all`: `scripts/sync-all.ps1`; mirror both `AGENTS.md` and skills.

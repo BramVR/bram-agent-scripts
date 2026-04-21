@@ -72,6 +72,19 @@ Repo-local fallback:
 .\scripts\committer.ps1
 ```
 
+Preview or run an Oracle consult:
+
+```powershell
+.\scripts\oracle.ps1 -Prompt "Review this change" -File "src/**" -DryRun summary -FilesReport
+.\scripts\oracle.ps1 -Status
+```
+
+Windows Oracle browser runs reuse this persistent profile by default:
+
+```text
+C:\Users\ZO\.oracle\browser-profile
+```
+
 ## Git Safety
 
 - Prefer `git status`, `git diff`, `git log`.

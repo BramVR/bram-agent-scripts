@@ -20,10 +20,11 @@ Personal Codex workflow files, skills, and helper scripts.
 ## Helper Scripts
 - `committer`: run via `.\scripts\committer.ps1 "message" "path1" "path2"` to stage only explicit paths and commit them
 - `docs-list`: run via `.\scripts\docs-list.ps1` to scan the current working repo's `docs/`, print each markdown file's front-matter summary, and surface `read_when` hints
+- `oracle`: run via `.\scripts\oracle.ps1 -Prompt "..." -File "src/**"` to bundle a prompt plus selected files for a second-model consult via `@steipete/oracle`
 
 ## Using Skills
 - Open Codex and type `/skills` to browse available skills.
-- Type `$pickup`, `$handoff`, `$commit-atomic`, `$split-commits`, or `$video-transcript-downloader` to invoke one explicitly.
+- Type `$pickup`, `$handoff`, `$commit-atomic`, `$split-commits`, `$video-transcript-downloader`, or `$oracle` to invoke one explicitly.
 
 ## Notes
 - This repo is personal workflow infrastructure, not project documentation.
