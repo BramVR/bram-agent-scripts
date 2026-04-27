@@ -24,7 +24,8 @@ py -m yt_dlp `
 
 3. Find the generated `.vtt` file.
 4. Convert `.vtt` to plain text with `scripts/vtt_to_text.py`.
-5. Read the `.txt` output and give the user the result or a concise summary, depending on the request.
+5. Verify the `.txt` output exists, is non-empty, and starts with transcript text rather than subtitle metadata.
+6. Read the `.txt` output and give the user the result or a concise summary, depending on the request.
 
 Commands:
 
@@ -43,4 +44,5 @@ py -m yt_dlp --list-subs "<VIDEO_URL>"
 ```
 
 - If the user wants another language, change `--sub-langs`.
+- If the cleaned output is empty or noisy, inspect the `.vtt` before retrying or summarizing.
 - If subtitle download fails because the site is unsupported or has no captions, say that directly and stop rather than fabricating a transcript.
