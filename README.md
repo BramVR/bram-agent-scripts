@@ -4,6 +4,7 @@ Personal Codex workflow files, skills, and helper scripts.
 
 ## Layout
 - `AGENTS.md`: canonical personal workflow instructions
+- `tools.md`: local helper catalog and usage notes
 - `skills/`: reusable Codex skills mirrored into `~/.agents/skills`
 - `scripts/`: helper scripts for syncing and git workflow
 
@@ -13,21 +14,22 @@ Personal Codex workflow files, skills, and helper scripts.
 
 ## Bootstrap
 ```powershell
-.\scripts\sync-agents.ps1
-.\scripts\sync-skills.ps1
+.\scripts\sync-all.ps1
 ```
 
 ## Helper Scripts
 - `committer`: run via `.\scripts\committer.ps1 "message" "path1" "path2"` to stage only explicit paths and commit them
 - `docs-list`: run via `.\scripts\docs-list.ps1` to scan the current working repo's `docs/`, print each markdown file's front-matter summary, and surface `read_when` hints
 - `oracle`: run via `.\scripts\oracle.ps1 -Prompt "..." -File "src/**"` to bundle a prompt plus selected files for a second-model consult via `@steipete/oracle`
+- See `tools.md` for fuller tool notes.
 
 ## Using Skills
 - Open Codex and type `/skills` to browse available skills.
-- Type `$pickup`, `$handoff`, `$commit-atomic`, `$split-commits`, `$video-transcript-downloader`, or `$oracle` to invoke one explicitly.
+- Type `$pickup`, `$handoff`, `$commit-atomic`, `$split-commits`, `$video-transcript-downloader`, `$oracle`, `$create-cli`, or `$markdown-converter` to invoke one explicitly.
 
 ## Notes
 - This repo is personal workflow infrastructure, not project documentation.
 - `docs-list` is included as a portable helper for downstream repos that maintain a `docs/` directory with front matter. By default it targets the current working repo's `docs/`.
-- Repo-local `AGENTS.md` files remain the source of truth for repo-specific rules.
+- Personal repo `AGENTS.md` files should point here first, then add repo-local overrides below.
+- Shared/public repos should keep self-contained `AGENTS.md` files.
 - Codex custom prompts in `~/.codex/prompts` are deprecated; this repo uses skills instead.
