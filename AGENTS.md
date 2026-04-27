@@ -17,9 +17,9 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 - Personal repos can point here or copy selectively.
 - Edit this file here, then mirror to `C:/Users/ZO/AGENTS.md`.
 
-## Critical Thinking
-- Fix root cause, not band-aid.
-- Unsure: read more code first; if still stuck, ask with short options.
+## Operating Rules
+- Fix root cause, not symptoms.
+- Unsure: read more code first; if still stuck, state knowns, unknowns, next check.
 - Conflicts: call out; pick safer path.
 - Unrecognized changes: assume another agent; keep going; focus your changes. If it causes issues, stop and ask.
 - Leave breadcrumb notes in thread.
@@ -66,6 +66,8 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 - Prefer project docs over session memory. If the active repo has `docs/`, scan that repo's `docs/` first with `docs-list` when entering a subsystem with unclear rules or prior decisions.
 - Update docs when behavior, public usage, or workflow changes. Reused workflow/contract: document once in the canonical place.
 - If a feature or subsystem needs durable context, write or update the active repo's `docs/*.md` as part of the change so later sessions can reload it fast.
+- Do not document helper scripts, skills, or commands unless they exist in this repo or the stated runtime location.
+- Before adding command docs, verify the path or command. If optional, say `if present`.
 - New docs should start with front matter for `docs-list`: `summary` and `read_when`. Example:
   ```yaml
   ---
@@ -83,6 +85,8 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 - Global user skills live in `C:/Users/ZO/.agents/skills/`.
 - Canonical skill dirs live in `C:/PROJECTS/GG/bram-agent-scripts/skills/` and mirror into home skills.
 - Keep skills small, explicit, task-oriented.
+- Each skill should include a clear `description`, concrete trigger/use case, and a short verification or troubleshooting note when it wraps a tool.
+- Avoid duplicated long capability lists; keep discoverability in metadata, workflow details in the body.
 - Prefer skills for repeatable workflows such as pickup, handoff, and commit planning.
 - Baseline skills: `$pickup`, `$handoff`, `$commit-atomic`, `$split-commits`, `$video-transcript-downloader`, `$oracle`.
 
