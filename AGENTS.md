@@ -12,17 +12,11 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 - Shell: PowerShell on Windows.
 - Style: concise, direct, telegraph. Min tokens in `AGENTS.md` and replies.
 - Say what you are doing and why. If uncertain: knowns, unknowns, next check.
+- Conflicts: call out; pick safer path.
 - Repo-local `AGENTS.md` may add stricter rules or override workflow details.
 - Shared/public repos should keep their own self-contained `AGENTS.md`.
 - Personal repos can point here or copy selectively.
 - Edit this file here, then mirror to `C:/Users/ZO/AGENTS.md`.
-
-## Operating Rules
-- Fix root cause, not symptoms.
-- Unsure: read more code first; if still stuck, state knowns, unknowns, next check.
-- Conflicts: call out; pick safer path.
-- Unrecognized changes: assume another agent; keep going; focus your changes. If it causes issues, stop and ask.
-- Leave breadcrumb notes in thread.
 
 ## Git
 - Safe by default: `git status`, `git diff`, `git log`. Push only when user asks.
@@ -43,6 +37,7 @@ Canonical Bram Codex workflow. Edit here, then mirror to `C:/Users/ZO/AGENTS.md`
 - No amend unless asked. No force-push unless explicitly intended.
 - Destructive ops forbidden unless explicit: `reset --hard`, `clean`, `restore`, `rm`, mass delete, or similar.
 - Do not revert unrelated local changes.
+- Unrecognized changes: assume another agent; keep going; focus your changes. If it causes issues, stop and ask.
 - Do not delete or rename unexpected stuff; stop and ask.
 - If the worktree has unrelated edits, isolate your commit to your files only.
 - Need upstream file: stage in `/tmp/`, then cherry-pick; never overwrite tracked files wholesale.
